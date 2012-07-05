@@ -29,6 +29,8 @@ TODO: check for dependencies, and also change this for them
 import sys
 def rreplace(s, old, new, occurrence=1):
     """Repalce the rightmost 'occurrence' occurrences of old with new"""
+    if not old:
+    	return s
     list_ = s.rsplit(old, occurrence)
     return new.join(list_)
 
@@ -43,11 +45,11 @@ def main(arguments):
         sys.stderr.write("Usage: %s <toolkitname> <toolkit version> <filenames.eb>+ \n" % arguments[0])
         sys.exit(1)
 
-    toolkitname = arguments[1]
-    toolkitversion = arguments[2]
+    newtoolkitname = arguments[1]
+    newtoolkitversion = arguments[2]
     files = arguments[3:]
     # TODO: use logger
-    print "creating .eb file for toolkit %s-%s in %s" % (toolkitname, toolkitversion, files)
+    print "creating .eb file for toolkit %s-%s in %s" % (newtoolkitname, newtoolkitversion, files)
 
     for file_ in files:
         # get current toolkit name and value
@@ -55,20 +57,30 @@ def main(arguments):
         contents = oldfile.read()
         oldfile.close()
         # 'parse' the file
-        exec(contents)
-        origname = toolkit['name']
-        origversion = toolkit['version']
         # create new name, only one replace here, start searching right side of the name
-        newname = rreplace(file_, origname , toolkitname)
-        newname = rreplace(newname, origversion, toolkitversion)
+        exec(contents)
+	try:
+	    if not toolkitsuffix:
+		raise NameError
+            #newname = rreplace(file_, toolkitsuffix, "-%s-%s" % (toolkitname,toolkitversion))
+	    list_ = toolkitsuffix.split("-")
+	    origname = list_[1]
+            origversion = "-".join(list_[2:])
+	except NameError, err:
+            origname = toolkit['name']
+            origversion = toolkit['version']
+	    toolkitsuffix = None
+        newname = file_.replace(origname , newtoolkitname)
+        newname = newname.replace(origversion, newtoolkitversion)
+	print "processing %s, orig toolkitname %s, orig version %s" % (file_, origname, origversion)
         newfile = open(newname, 'w')
         # replace old toolkit with new one
-        contents = contents.replace(origname , toolkitname)
-        contents = contents.replace(origversion, toolkitversion)
+        contents = contents.replace(origname , newtoolkitname)
+        contents = contents.replace(origversion, newtoolkitversion)
         # write it out
         newfile.write(contents)
         newfile.close()
-        print "written out new %s" % newname
+	print "wrote out %s" % newname
 
 
 main(sys.argv)
