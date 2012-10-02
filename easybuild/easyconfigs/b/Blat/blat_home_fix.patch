@@ -1,0 +1,13 @@
+diff -ru blatSrc.ORIG/inc/common.mk blatSrc/inc/common.mk
+--- blatSrc.ORIG/inc/common.mk  2012-02-22 14:08:44.931200737 +0100
++++ blatSrc/inc/common.mk   2012-02-22 14:08:59.671335993 +0100
+@@ -33,7 +33,7 @@
+     CGI_BIN=/usr/local/apache/cgi-bin
+ endif
+ ifeq (${BINDIR},)
+-    BINDIR = ${HOME}/bin/${MACHTYPE}
++    BINDIR = ${BLATHOME}/bin/${MACHTYPE}
+ endif
+ MKDIR=mkdir -p
+ ifeq (${STRIP},)
+

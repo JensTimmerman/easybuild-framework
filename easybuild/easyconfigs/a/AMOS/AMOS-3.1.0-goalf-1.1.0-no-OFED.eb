@@ -1,0 +1,22 @@
+name = 'AMOS'
+version = '3.1.0'
+
+homepage = 'http://sourceforge.net/apps/mediawiki/amos'
+description = """AMOS is a collection of tools and class interfaces for the assembly of DNA reads. 
+The package includes a robust infrastructure, modular assembly pipelines, and tools for overlapping, 
+consensus generation, contigging, and assembly manipulation."""
+
+toolkit = {'name': 'goalf', 'version': '1.1.0-no-OFED'}
+
+toolkitopts = {'optarch': True, "pic": True}
+
+sources = ['%s-%s.tar.gz' % (name.lower(), version)]
+sourceURLs = ['http://prdownloads.sourceforge.net/%s' % name.lower()]
+
+dependencies = [
+                ('expat', '2.1.0'),
+                ('Boost', '1.51.0', '-Python-2.7.3'),
+                ]
+
+parallel = 1
+configopts = " --with-Boost-dir=$EBROOTBOOST"

@@ -52,7 +52,7 @@ from easybuild.tools.modules import Modules, get_software_root
 from easybuild.tools.systemtools import get_core_count
 
 
-class Application:
+class Application(object):
     """
     Support for building and installing applications with configure/make/make install
     """
@@ -742,7 +742,7 @@ class Application:
             gid = grp.getgrnam(self.getcfg('group'))[2]
             # rwx for owner, r-x for group, --- for other
             try:
-                adjust_permissions(self.installdir, 0750, recursive=True, group_id=gid, relative=False, 
+                adjust_permissions(self.installdir, 0750, recursive=True, group_id=gid, relative=False,
                                    ignore_errors=True)
             except EasyBuildError, err:
                 self.log.error("Unable to change group permissions of file(s). " \
