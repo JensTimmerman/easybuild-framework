@@ -17,8 +17,8 @@ dependencies = [
                 ('expat', '2.1.0'),
                 ('MUMmer', '3.23'),
                 ('Boost', '1.51.0', '-Python-2.7.3'),
+                ('Blat', '35'),
                 ]
 
 parallel = 1
-preconfigopts = " NUCMER=$EBROOTMUMMER/nucmer "
 configopts = " --with-Boost-dir=$EBROOTBOOST"

@@ -59,7 +59,7 @@ class EB_MUMmer(Application):
     def make_module_extra(self):
         """Add the root to path, since this is where the binaries are located"""
         txt = super(self.__class__, self).make_module_extra()
-        txt += self.moduleGenerator.prependPaths("PATH", [self.installdir])
+        txt += self.moduleGenerator.prependPaths("PATH", [""])
         return txt
 
     def sanitycheck(self):
