@@ -5,7 +5,7 @@ homepage = 'http://users.soe.ucsc.edu/~kent/src/'
 description = """Blat can be used for merging (pairwise alignment of contigs to remove redundant contigs) and aligning
 contigs to a reference genome."""
 
-toolkit = {'name': 'goalf', 'version': '1.1.0-no-OFED'}
+toolkit = {'name': 'ictce', 'version': '4.0.6'}
 
 sources = ['%sSrc%s.zip' % (name.lower(), version)]
 sourceURLs = [homepage]

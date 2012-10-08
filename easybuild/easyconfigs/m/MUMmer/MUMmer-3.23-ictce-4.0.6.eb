@@ -1,0 +1,17 @@
+name = 'MUMmer'
+version = '3.23'
+
+homepage = 'http://mummer.sourceforge.net/'
+description = """MUMmer is a system for rapidly aligning entire genomes, whether in complete or draft form. 
+MUMmer can also align incomplete genomes; it can easily handle the 100s or 1000s of contigs from a shotgun sequencing
+project, and will align them to another set of contigs or a genome using the NUCmer program included with the system.
+If the species are too divergent for a DNA sequence alignment to detect similarity, then the PROmer program can 
+generate alignments based upon the six-frame translations of both input sequences."""
+
+toolkit = {'name': 'ictce', 'version': '4.0.6'}
+
+toolkitopts = {'optarch': True, "pic": True}
+
+sources = ['%s%s.tar.gz' % (name, version)]
+sourceURLs = ['http://prdownloads.sourceforge.net/%s' % name.lower()]
+
