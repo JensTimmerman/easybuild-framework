@@ -18,6 +18,7 @@ dependencies = [
                 ('MUMmer', '3.23'),
                 ('Boost', '1.49.0', '-Python-2.7.3'),
                 ('Blat', '35'),
+                ('Perl', '2,15'), # TODO
                 ]
 
 parallel = 1

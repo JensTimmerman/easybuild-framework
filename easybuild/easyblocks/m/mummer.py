@@ -54,7 +54,7 @@ class EB_MUMmer(Application):
         # remove actuall installdir, shutil doesn't like it to be there
         shutil.rmtree(self.installdir)
         shutil.copytree(self.getcfg('startfrom'), self.installdir, symlinks=True)
-        # we could now actually remove everything that is not in sanityCheckPaths
+        # TODO: we could now actually remove everything that is not in sanityCheckPaths
 
     def make_module_extra(self):
         """Add the root to path, since this is where the binaries are located"""
