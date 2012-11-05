@@ -27,55 +27,53 @@ EasyBuild support for building and installing MUMer, implemented as an easyblock
 """
 
 import shutil
+from easybuild.easyblocks.generic.configuremake import ConfigureMake 
 
-from easybuild.framework.application import Application
 from easybuild.tools.filetools import run_cmd
 
 
-class EB_MUMmer(Application):
+class EB_MUMmer(ConfigureMake):
     """Support for building and installing MUMmer."""
 
-    def configure(self):
+    def configure_step(self):
         """Configure MUMmer build by running make check."""
-        cmd = "%s make check %s" % (self.getcfg('preconfigopts'), self.getcfg('configopts'))
+        cmd = "%s make check %s" % (self.cfg['preconfigopts'], self.cfg['configopts'])
         run_cmd(cmd, log_all=True, simple=True, log_output=True)
         # build in installation directory
         self.build_in_installdir = True
 
-    def make(self):
+    def make_step(self):
         """Build MUMer"""
-        makeopts = self.getcfg('makeopts')
+        makeopts = self.cfg['makeopts']
         # set all as default make argument
         makeopts = " ".join([makeopts, 'all'])
-        super(self.__class__, self).make()
+        super(self.__class__, self).build_step()
 
-    def make_install(self):
+    def install_step(self):
         """Building was performed in build dir, so copy everything over."""
         # remove actuall installdir, shutil doesn't like it to be there
         shutil.rmtree(self.installdir)
-        shutil.copytree(self.getcfg('startfrom'), self.installdir, symlinks=True)
+        shutil.copytree(self.cfg['start_dir'], self.installdir, symlinks=True)
 
     def make_module_extra(self):
         """Add the root to path, since this is where the binaries are located"""
         txt = super(self.__class__, self).make_module_extra()
-        txt += self.moduleGenerator.prependPaths("PATH", [""])
-        txt += self.moduleGenerator.prependPaths("PATH", ["scripts"])
+        txt += self.moduleGenerator.prepend_paths("PATH", [""])
+        txt += self.moduleGenerator.prepend_paths("PERL5LIB", ["scripts"])
         return txt
 
-    def sanitycheck(self):
+    def sanity_check_step(self):
         """Custom sanity check for OpenFOAM"""
 
-        if not self.getcfg('sanityCheckPaths'):
-
-            self.setcfg('sanityCheckPaths', {'files': ['mapview', 'combineMUMs', 'mgaps', 'run-mummer3', 'show-coords',
+        custom_paths =   {'files': ['mapview', 'combineMUMs', 'mgaps', 'run-mummer3', 'show-coords',
                                                        'show-snps', 'show-aligns', 'dnadiff', 'mummerplot',
                                                        'nucmer2xfig', 'annotate', 'promer', 'show-diff', 'nucmer',
                                                        'delta-filter', 'src', 'run-mummer1', 'gaps', 'mummer',
                                                        'repeat-match', 'show-tiling', 'exact-tandems',
                                                        ],
                                              'dirs': ['scripts', 'docs', 'aux_bin']
-                                           })
+                                           }
 
-            self.log.info("Customized sanity check paths: %s" % self.getcfg('sanityCheckPaths'))
+        self.log.info("Customized sanity check paths: %s" % self.cfg['sanityCheckPaths'])
 
-        Application.sanitycheck(self)
+        super(EB_MUMmer, self).sanity_check_step(custom_paths=custom_paths)
