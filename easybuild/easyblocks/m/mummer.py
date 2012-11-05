@@ -54,7 +54,6 @@ class EB_MUMmer(Application):
         # remove actuall installdir, shutil doesn't like it to be there
         shutil.rmtree(self.installdir)
         shutil.copytree(self.getcfg('startfrom'), self.installdir, symlinks=True)
-        # TODO: we could now actually remove everything that is not in sanityCheckPaths
 
     def make_module_extra(self):
         """Add the root to path, since this is where the binaries are located"""
@@ -70,11 +69,10 @@ class EB_MUMmer(Application):
             self.setcfg('sanityCheckPaths', {'files': ['mapview', 'combineMUMs', 'mgaps', 'run-mummer3', 'show-coords',
                                                        'show-snps', 'show-aligns', 'dnadiff', 'mummerplot',
                                                        'nucmer2xfig', 'annotate', 'promer', 'show-diff', 'nucmer',
-                                                       'docs', 'delta-filter', 'src', 'run-mummer1', 'gaps', 'mummer',
-                                                       'repeat-match', 'scripts', 'show-tiling', 'exact-tandems',
-                                                       'aux_bin'
+                                                       'delta-filter', 'src', 'run-mummer1', 'gaps', 'mummer',
+                                                       'repeat-match', 'show-tiling', 'exact-tandems',
                                                        ],
-                                             'dirs': []
+                                             'dirs': ['scripts', 'docs', 'aux_bin']
                                            })
 
             self.log.info("Customized sanity check paths: %s" % self.getcfg('sanityCheckPaths'))
