@@ -8,9 +8,9 @@ project, and will align them to another set of contigs or a genome using the NUC
 If the species are too divergent for a DNA sequence alignment to detect similarity, then the PROmer program can 
 generate alignments based upon the six-frame translations of both input sequences."""
 
-toolkit = {'name': 'ictce', 'version': '4.0.6'}
+toolchain = {'name': 'ictce', 'version': '4.0.6'}
 
-toolkitopts = {'optarch': True, "pic": True}
+toolchainopts = {'optarch': True, "pic": True}
 
 dependencies = ['Perl', '5.14.2']
 

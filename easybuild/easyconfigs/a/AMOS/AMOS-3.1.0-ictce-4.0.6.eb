@@ -6,9 +6,9 @@ description = """AMOS is a collection of tools and class interfaces for the asse
 The package includes a robust infrastructure, modular assembly pipelines, and tools for overlapping, 
 consensus generation, contigging, and assembly manipulation."""
 
-toolkit = {'name': 'ictce', 'version': '4.0.6'}
+toolchain = {'name': 'ictce', 'version': '4.0.6'}
 
-toolkitopts = {'optarch': True, "pic": True}
+toolchainopts = {'optarch': True, "pic": True}
 
 sources = ['%s-%s.tar.gz' % (name.lower(), version)]
 sourceURLs = ['http://prdownloads.sourceforge.net/%s' % name.lower()]

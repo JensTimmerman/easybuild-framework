@@ -6,9 +6,9 @@ description = """AMOS is a collection of tools and class interfaces for the asse
 The package includes a robust infrastructure, modular assembly pipelines, and tools for overlapping, 
 consensus generation, contigging, and assembly manipulation."""
 
-toolkit = {'name': 'goalf', 'version': '1.1.0-no-OFED'}
+toolchain = {'name': 'goalf', 'version': '1.1.0-no-OFED'}
 
-toolkitopts = {'optarch': True, "pic": True}
+toolchainopts = {'optarch': True, "pic": True}
 
 sources = ['%s-%s.tar.gz' % (name.lower(), version)]
 sourceURLs = ['http://prdownloads.sourceforge.net/%s' % name.lower()]
